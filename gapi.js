@@ -79,7 +79,7 @@ module.exports = {
                 try {
                     var oauth = await getauth(JSON.parse(content));
                     var sheetname = getSheetName()
-                    var data = await toget(oauth, SSID, sheetname + '!A1:T33', 'ROWS');
+                    var data = await toget(oauth, SSID, sheetname + '!A1:AB33', 'ROWS');
                     resolve(data);
                 }
                 catch (err) {
@@ -88,6 +88,52 @@ module.exports = {
             });
         });
     },
+     getalltable: function (SSID) {
+        return new Promise(function (resolve, reject) {
+            fs.readFile('credentials.json', async (err, content) => {
+                if (err) {
+                    console.log('Error loading client secret file:', err);
+                    reject(err);
+                    return;
+                }
+                try {
+                    var oauth = await getauth(JSON.parse(content));
+                    var data = await toget(oauth, SSID, 'List' + '!A1:G31', 'COLUMNS');
+                    // resolve(data);
+                    var sheetname = getSheetName()
+                    var data2 = await toget(oauth, SSID, sheetname + '!A1:AB33', 'ROWS');
+                    resolve([data, data2]);
+                }
+                catch (err) {
+                    reject(err);
+                }
+            });
+        });
+     },
+
+     getotable: function (SSID,listname) {
+        return new Promise(function (resolve, reject) {
+            fs.readFile('credentials.json', async (err, content) => {
+                if (err) {
+                    console.log('Error loading client secret file:', err);
+                    reject(err);
+                    return;
+                }
+                try {
+                    var oauth = await getauth(JSON.parse(content));
+                    var data = await toget(oauth, SSID, listname + '!A1:G31', 'COLUMNS');
+                    // resolve(data);
+                    var sheetname = getSheetName()
+                    var data2 = await toget(oauth, SSID, sheetname + '!A1:AB33', 'ROWS');
+                    resolve([data, data2]);
+                }
+                catch (err) {
+                    reject(err);
+                }
+            });
+        });
+     },
+
 
     getCollectingtable: function (SSID) {
         return new Promise(function (resolve, reject) {
@@ -99,10 +145,10 @@ module.exports = {
                 }
                 try {
                     var oauth = await getauth(JSON.parse(content));
-                    var data = await toget(oauth, SSID, '集刀' + '!A1:E31', 'COLUMNS');
+                    var data = await toget(oauth, SSID, '集刀' + '!A1:G31', 'COLUMNS');
                     // resolve(data);
                     var sheetname = getSheetName()
-                    var data2 = await toget(oauth, SSID, sheetname + '!A1:T33', 'ROWS');
+                    var data2 = await toget(oauth, SSID, sheetname + '!A1:AB33', 'ROWS');
                     resolve([data, data2]);
                 }
                 catch (err) {
@@ -111,6 +157,28 @@ module.exports = {
             });
         });
     },
+
+
+ getotablebyRow: function (SSID,list) {
+        return new Promise(function (resolve, reject) {
+            fs.readFile('credentials.json', async (err, content) => {
+                if (err) {
+                    console.log('Error loading client secret file:', err);
+                    reject(err);
+                    return;
+                }
+                try {
+                    var oauth = await getauth(JSON.parse(content));
+                    var data = await toget(oauth, SSID, list + '!A1:G31', 'ROWS');
+                    resolve(data);
+                }
+                catch (err) {
+                    reject(err);
+                }
+            });
+        });
+    },
+
 
     getCollectingtablebyRow: function (SSID) {
         return new Promise(function (resolve, reject) {
@@ -122,7 +190,7 @@ module.exports = {
                 }
                 try {
                     var oauth = await getauth(JSON.parse(content));
-                    var data = await toget(oauth, SSID, '集刀' + '!A1:E31', 'ROWS');
+                    var data = await toget(oauth, SSID, '集刀' + '!A1:G31', 'ROWS');
                     resolve(data);
                 }
                 catch (err) {
@@ -132,7 +200,7 @@ module.exports = {
         });
     },
 
-    getBKCollectingtable: function (SSID) {
+    getBKCollectingtable: function (SSID,list) {
         return new Promise(function (resolve, reject) {
             fs.readFile('credentials.json', async (err, content) => {
                 if (err) {
@@ -142,7 +210,7 @@ module.exports = {
                 }
                 try {
                     var oauth = await getauth(JSON.parse(content));
-                    var data = await toget(oauth, SSID, '集刀' + '!A33:E64', 'ROWS');
+                    var data = await toget(oauth, SSID, list + '!A33:G64', 'ROWS');
                     resolve(data);
                 }
                 catch (err) {
@@ -163,7 +231,7 @@ module.exports = {
                 try {
                     var oauth = await getauth(JSON.parse(content));
                     var sheetname = getSheetName()
-                    var data = await toget(oauth, SSID, sheetname + '!C41:G50', 'ROWS');
+                    var data = await toget(oauth, SSID, sheetname + '!C41:J51', 'ROWS');
                     resolve(data);
                 }
                 catch (err) {
