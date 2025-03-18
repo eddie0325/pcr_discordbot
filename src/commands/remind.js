@@ -4,7 +4,7 @@ module.exports = {
     name: 'remind',
     aliases: ['提醒'],
     description: '提醒成員',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let table = await gapi.getDemageTable(chlist[message.channel.id]);
             let leftknife = table[32][1];

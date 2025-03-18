@@ -1,8 +1,10 @@
+const { objlist } = require('../utils/constants.js');
+
 module.exports = {
     name: 'delfor',
     aliases: ['代刪'],
     description: '幫指定成員收回王',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let memberid = args[0].replace(/[^0-9\.]+/g, '');
             if (!(memberid in userlist)) {
@@ -13,7 +15,7 @@ module.exports = {
                 return;
             }
             let list = objlist[args[1].substring(0, 1)];
-            // var oldctable = await gapi.getotablebyRow(chlist[message.channel.id],list);
+            // let oldctable = await gapi.getotablebyRow(chlist[message.channel.id],list);
             let tables = await gapi.getotable(chlist[message.channel.id], list);
             let memberName = userlist[memberid][0];
             let ctable = tables[0];

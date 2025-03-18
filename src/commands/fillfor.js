@@ -4,9 +4,9 @@ module.exports = {
     name: 'fillfor',
     aliases: ['代填', '幫填'],
     description: '代填傷害表',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
-            var memberid = args[0].replace(/[^0-9\.]+/g, '');
+            let memberid = args[0].replace(/[^0-9\.]+/g, '');
             if (!(memberid in userlist)) {
                 throw new Error('錯誤的成員名稱!');
             }

@@ -2,13 +2,13 @@ module.exports = {
     name: 'checkknife',
     aliases: ['查刀'],
     description: '查看刀數',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let table = await gapi.getDemageTable(chlist[message.channel.id]);
             let msg = '剩餘刀數　成員(組別)\n';
             let count = 0;
             let compenstate_count = 0;
-            for (var row = 2; row < 32; row++) {
+            for (let row = 2; row < 32; row++) {
                 let leftknife = table[row][1];
                 if (table[row][18] == 'v') 
                     compenstate_count += 1;
@@ -20,7 +20,7 @@ module.exports = {
                 count += leftknife;
                 if (leftknife < 3) {
                     msg += ' 已出: '
-                    for (var i = 4; i <= 14; i += 5) {
+                    for (let i = 4; i <= 14; i += 5) {
                         let obj = table[row][i]
                         if (!obj.isNaN)
                             msg += obj + ' '

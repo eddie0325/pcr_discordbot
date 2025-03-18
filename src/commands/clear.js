@@ -1,8 +1,10 @@
+const { objlist } = require('../utils/constants.js');
+
 module.exports = {
     name: 'clear',
     aliases: ['清除'],
     description: '清除班表',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             if (args.length != 1) {
                 message.channel.send('請輸入要清除的列表 ex: !清除 一王');

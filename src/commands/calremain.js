@@ -2,7 +2,7 @@ module.exports = {
     name: 'calremain',
     aliases: ['補償計算', '補償', '殘秒'],
     description: '補償計算',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let A = parseInt(args[0]);
             let B = parseInt(args[1]);

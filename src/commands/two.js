@@ -4,7 +4,7 @@ module.exports = {
     name: 'two',
     aliases: ['二王', '2'],
     description: '查看二王報名人員清單和回報傷害',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let tables = await gapi.getotable(chlist[message.channel.id], '二王');
             let ctable = tables[0];

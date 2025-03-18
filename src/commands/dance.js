@@ -2,7 +2,7 @@ module.exports = {
     name: 'dance',
     aliases: ['舞蹈'],
     description: '舞蹈',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let embed = {
                 "image": {

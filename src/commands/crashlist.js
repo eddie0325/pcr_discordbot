@@ -2,7 +2,7 @@ module.exports = {
     name: 'crashlist',
     aliases: ['閃退'],
     description: '查看閃退人員',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let table = await gapi.getDemageTable(chlist[message.channel.id]);
             let msg = '今日閃退已用成員:(若要登記閃退請使用<!登記閃退>)\n';

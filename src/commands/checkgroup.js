@@ -2,7 +2,7 @@ module.exports = {
     name: 'checkgroup',
     aliases: ['查組', '分組名單'],
     description: '查看分組名單',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let table = await gapi.getGroup(chlist[message.channel.id]);
             let grouplist = {};

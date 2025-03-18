@@ -2,7 +2,7 @@ module.exports = {
     name: 'url',
     aliases: ['表單', '表格'],
     description: '查看表單',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let ssid = chlist[message.channel.id];//chlist[message.channel.id]
             message.channel.send('https://docs.google.com/spreadsheets/d/' + ssid);

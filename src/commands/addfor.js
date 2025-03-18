@@ -1,10 +1,11 @@
+const { objlist } = require('../utils/constants.js');
 const { getcrash, stateleftknife } = require('../utils/utils.js');
 
 module.exports = {
     name: 'addfor',
     aliases: ['代報'],
     description: '幫指定成員報名王',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let str = ':'; //組合回報訊息(args)
             if (args.length <= 1) {

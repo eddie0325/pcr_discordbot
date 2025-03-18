@@ -5,7 +5,7 @@ module.exports = {
     name: 'status',
     aliases: ['狀態'],
     description: '查看狀態',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             // 預設查自己的
             let memberid = message.author.id;

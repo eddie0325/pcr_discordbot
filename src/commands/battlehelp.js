@@ -2,7 +2,7 @@ module.exports = {
     name: 'battlehelp',
     aliases: ['報刀說明'],
     description: '取得詳細報刀指令',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let embed = {
                 "title": "報刀功能說明",

@@ -1,10 +1,11 @@
+const { objlist } = require('../utils/constants.js');
 const { getcrash, stateleftknife } = require('../utils/utils.js');
 
 module.exports = {
     name: 'dadd',
     aliases: ['連報'],
     description: '同一支王連報兩刀',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let str = ':'; //組合回報訊息(args)
             if (args.length < 1) {

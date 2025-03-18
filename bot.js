@@ -9,10 +9,6 @@ const queue = require("./src/queue");
 const auth = require('./auth.json');
 const token = auth.token;
 
-
-const objlist = { "1": "一王", "2": "二王", "3": "三王", "4": "四王", "5": "五王", "一": "一王", "二": "二王", "三": "三王", "四": "四王", "五": "五王" }
-
-
 client.commands = new Map(); // 用 Map 來存放指令
 const commandFiles = fs.readdirSync("./src/commands").filter(file => file.endsWith(".js"));
 for (const file of commandFiles) {
@@ -47,8 +43,8 @@ client.on('message', async message => {
 		if (message.author.id in userlist && message.channel.id in chlist) {
 
 			if (client.commands.has(commandName)) {
+				console.log(commandName);
 				queue.push(async () => {
-					console.log("test3");
 					try {
 						await client.commands.get(commandName).execute(message, args, userlist, chlist, gapi);
 					} catch (error) {

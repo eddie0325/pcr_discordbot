@@ -9,8 +9,8 @@ async function loadUsers() {
         userlist = {};
         usercode = {};
         for (i in ssidlist) {
-            var ul = await gapi.getUserList(ssidlist[i]);
-            for (var j in ul) {
+            let ul = await gapi.getUserList(ssidlist[i]);
+            for (let j in ul) {
                 userlist[ul[j][1]] = [ul[j][0], ssidlist[i]];
                 usercode[ul[j][0]] = [ul[j][1], ssidlist[i]];
             }

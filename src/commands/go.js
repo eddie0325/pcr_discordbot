@@ -1,8 +1,10 @@
+const { objlist } = require('../utils/constants.js');
+
 module.exports = {
     name: 'go',
     aliases: ['進場', '進'],
     description: '進場',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             if (args.length != 1) {
                 message.channel.send('請輸入要進場的王 ex: !進 1 ');

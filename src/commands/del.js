@@ -1,15 +1,17 @@
+const { objlist } = require('../utils/constants.js');
+
 module.exports = {
     name: 'del',
     aliases: ['收回'],
     description: '收回王',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             if (args.length != 1) {
                 message.channel.send('請輸入要收回的王 ex: !del 5');
                 return;
             }
             let list = objlist[args[0].substring(0, 1)];
-            //var oldctable = await gapi.getotablebyRow(chlist[message.channel.id],list);
+            //let oldctable = await gapi.getotablebyRow(chlist[message.channel.id],list);
             let tables = await gapi.getotable(chlist[message.channel.id], list);
             let memberName = userlist[message.author.id][0];
             let ctable = tables[0];

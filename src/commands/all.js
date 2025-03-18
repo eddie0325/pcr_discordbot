@@ -2,7 +2,7 @@ module.exports = {
     name: 'all',
     aliases: ['總表'],
     description: '查看總表',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let tables = await gapi.getalltable(chlist[message.channel.id]);
             let ctable = tables[0];

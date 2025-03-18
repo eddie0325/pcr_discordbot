@@ -2,7 +2,7 @@ module.exports = {
     name: 'gp',
     aliases: ['分組', '分組說明'],
     description: '查看分組說明',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let table = await gapi.getGroup(chlist[message.channel.id]);
             let msg = '今日分組說明:\n';

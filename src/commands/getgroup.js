@@ -1,10 +1,10 @@
-const { aliases } = require("./fill");
+const { column } = require('../utils/constants.js');
 
 module.exports = {
     name: 'getgroup',
     aliases: ['領取', '登記'],
     description: '領取組別',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let memberid = "";
             let newGroup = "";
@@ -49,7 +49,7 @@ module.exports = {
                 throw new Error('查無此人');
             }
             let oriGroup = Dtable[row][19];
-            result = await gappi.fillin(String.format('B{0}:C{0}', row + 1), [[newGroup]], chlist[message.channel.id], userlist[memberid][0]);
+            result = await gappi.fillin(column[19] + (row + 1), [[newGroup]], chlist[message.channel.id], '');
             if (oriGroup == '' || typeof oriGroup === 'undefined') message.reply(String.format('{1} 已分到 {0}', newGroup, Dtable[row][0]));
             else message.reply(String.format('{2} 已由 {1} 改為 {0}', newGroup, oriGroup, Dtable[row][0]));
         }

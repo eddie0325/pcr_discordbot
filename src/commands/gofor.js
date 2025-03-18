@@ -1,7 +1,9 @@
+const { objlist } = require('../utils/constants.js');
+
 module.exports = {
     name: 'gofor',
     description: '幫指定成員進場',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             if (args.length != 2) {
                 message.channel.send('請輸入要進場的王 ex: !gofor @成員 1 ');

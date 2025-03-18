@@ -1,8 +1,10 @@
+const user = require('../user.js');
+
 module.exports = {
     name: 'reload',
     aliases: ['重新讀取'],
     description: '重新讀取成員名單',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             await user.loadUsers();
             message.reply('已重新讀取成員名單');

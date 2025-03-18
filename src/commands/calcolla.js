@@ -2,7 +2,7 @@ module.exports = {
     name: 'calcolla',
     aliases: ['合刀試算', '合刀', '尾傷'],
     description: '合刀試算',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let A = parseInt(args[0]);
             let sec = 0;

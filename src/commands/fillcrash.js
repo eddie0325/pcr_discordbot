@@ -2,7 +2,7 @@ module.exports = {
     name: 'fillcrash',
     aliases: ['登記閃退', '閃退登記'],
     description: '登記閃退',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let table = await gapi.getDemageTable(chlist[message.channel.id]);
             for (let i = 2; i < 32; i++) {

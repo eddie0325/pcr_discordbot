@@ -1,8 +1,10 @@
+const { objlist } = require('../utils/constants.js');
+
 module.exports = {
     name: 'checkboss',
     aliases: ['對王查刀'],
     description: '查看刀數',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let table = await gapi.getDemageTable(chlist[message.channel.id]);
             let gable = await gapi.getGroup(chlist[message.channel.id]);
@@ -13,10 +15,13 @@ module.exports = {
             let msg = '對' + objlist[goal] + '查刀\n'
             msg += '剩餘刀數　成員(組別)\n'
             for (let row = 2; row < 32; row++) {
-                leftknife = table[row][1];
-                if(table[row][19]== undefined) 
+                console.log(table[row]);
+                let leftknife = table[row][1];
+                if(table[row][19] == undefined || table[row][19] == '') 
                     continue;
-                let group =table[row][19];
+                // TODO 組別功能
+                let group = table[row][19];
+                console.log(group);
                 if (gable[group][5]!=goal && gable[group][6]!=goal && gable[group][7]!=goal) 
                     continue;
                 let hascompensate = table[row][18] == 'v' ? '(有殘)' : '             ';
@@ -26,7 +31,7 @@ module.exports = {
                     continue;
                 let group1 = (table[row][19] == '' || typeof table[row][19] === 'undefined') ? '' : String.format(' {0}', table[row][19]);
                 msg += String.format('{0}刀 {1}  {2}({3}) ', leftknife, hascompensate, table[row][0], group1);
-                count +=1;
+                count += 1;
                 
                 if (leftknife < 3) {
                     msg += ' 已出: '

@@ -1,8 +1,10 @@
+const { objlist } = require('../utils/constants.js');
+
 module.exports = {
     name: 'recover',
     aliases: ['回復'],
     description: '回復刀表',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             if (args.length != 1) {
                 message.channel.send('請輸入要回復的列表 ex: !回復 1');

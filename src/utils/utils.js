@@ -1,15 +1,17 @@
-const column = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-	'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM', 'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ',
-	'BA', 'BB', 'BC', 'BD', 'BE', 'BF', 'BG', 'BH'];
+
+const gapi = require('../../gapi.js');
+const user = require('../user.js');
+const { objlist, column } = require('./constants.js');
+const { chlist } = require('../../config.js');
 
 async function statusandreply(message, memberid) {
 	try {
-		memberName = userlist[memberid][0];
-		var table = await gapi.getDemageTable(chlist[message.channel.id]); //取得當天排刀表 userlist[memberid][1]
-		var status = await getstatus(table, memberName);
-		// console.log(status) //obj
+		let userlist = user.getUserList();
+		let memberName = userlist[memberid][0];
+		let table = await gapi.getDemageTable(chlist[message.channel.id]); //取得當天排刀表 userlist[memberid][1]
+		let status = await getstatus(table, memberName);
 
-		var repmsg = {
+		let repmsg = {
 			"embed":
 			{
 				"title": memberName + " 今日狀態",
@@ -17,7 +19,6 @@ async function statusandreply(message, memberid) {
 				"fields": status
 			}
 		};
-		// console.log(repmsg) //obj
 
 		message.reply(repmsg);
 	}
@@ -39,17 +40,18 @@ async function fillandreply(message, memberid,no, demage, object, ps,sec) {
 			message.reply('請填寫正確隊伍。ex: !fill 1 1 1234567');
 			return;
 		}
-		memberName = userlist[memberid][0];
-		var table = await gapi.getDemageTable(chlist[message.channel.id]);
-		var former_status = await getstatus(table, memberName);
+		let userlist = user.getUserList();
+		let memberName = userlist[memberid][0];
+		let table = await gapi.getDemageTable(chlist[message.channel.id]);
+		let former_status = await getstatus(table, memberName);
 
 		await fillindemage(message, table, memberid,no,demage, object, ps,sec);
 
-		var table2 = await gapi.getDemageTable(chlist[message.channel.id]);
-		var latter_status = await getstatus(table2, memberName);
+		let table2 = await gapi.getDemageTable(chlist[message.channel.id]);
+		let latter_status = await getstatus(table2, memberName);
 
 
-		var repmsg = {
+		let repmsg = {
 			"embed":
 			{
 				"title": memberName + " 今日狀態已更新為:",
@@ -63,7 +65,7 @@ async function fillandreply(message, memberid,no, demage, object, ps,sec) {
 	catch (err) {
 		console.log(err.message + ' : ' + message.author.username + ':' + message.content);
 		if (err.message == 'no fillable cell') {
-			var embed = {
+			let embed = {
 				"title": memberName + " 今日狀態",
 				"color": 5301186,
 				"fields": former_status
@@ -79,6 +81,7 @@ async function fillandreply(message, memberid,no, demage, object, ps,sec) {
 async function fillindemage(message, table, memberid,no, demage, object, ps,sec) {
 	return new Promise(async function (resolve, reject) {
 		try {
+			let userlist = user.getUserList();
 			let memberName = userlist[memberid][0];  
 			let row = 0;
 			for (let i = 0; i < table.length; i++) {
@@ -168,7 +171,7 @@ function getstatus(table, memberName) {
 		sta = [
 			{
 				"name": "閃退"+" _ " +"組別",
-				"value": (table[row][2] ? '已用' : '未用') +" _ "+table[row][19] ,
+				"value": (table[row][2] ? '已用' : '未用') +" _ " + table[row][19] ,
 			}
 		];
 		sta.push({
@@ -207,7 +210,7 @@ function getcrash(table, memberName) {
 		let crash = false; //boss team demage
 		for (let j = 0; j < table.length; j++) {
 			if (table[j][0] == memberName) {
-				crash = table[j][2]
+				crash = table[j][2];
 			}
 		}
 		resolve(crash);
@@ -215,8 +218,8 @@ function getcrash(table, memberName) {
 }
 
 function stateleftknife(table, memberName) {
-	var leftknife =0;
-	for (var j = 0; j < table.length; j++) {
+	let leftknife = 0;
+	for (let j = 0; j < table.length; j++) {
 		if (table[j][0] == memberName) {
 			if (table[j][18] == "v")
 				leftknife += 1;

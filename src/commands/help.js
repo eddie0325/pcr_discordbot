@@ -2,7 +2,7 @@ module.exports = {
     name: 'help',
     aliases: ['說明'],
     description: '使用說明書',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let embed = {
                 "title": "使用說明書",

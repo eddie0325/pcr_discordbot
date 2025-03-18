@@ -2,14 +2,14 @@ module.exports = {
     name: 'remain',
     aliases: ['殘刀', '補償表', '殘'],
     description: '查看補償表',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let table = await gapi.getDemageTable(chlist[message.channel.id]);
             // console.log(table)
             let msg = '=====未出補償刀=====\n'
             //let count = 0
-            //var compenstate_count = 0
-            for (var row = 2; row < 32; row++) {
+            //let compenstate_count = 0
+            for (let row = 2; row < 32; row++) {
                 if (table[row][18] == 'v') {
                     msg += String.format('{0}: ', table[row][0]);
                     if (table[row][5] == true && table[row][6] == '') {

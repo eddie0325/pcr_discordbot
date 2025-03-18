@@ -4,7 +4,7 @@ module.exports = {
     name: 'fill',
     aliases: ['填表', '傷害'],
     description: '填傷害表',
-    async execute(message, args, userlist, chlist, gappi) {
+    async execute(message, args, userlist, chlist, gapi) {
         try {
             let memberid = message.author.id;
             let damage = parseInt(args[2]);
