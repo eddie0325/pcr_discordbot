@@ -18,8 +18,7 @@ async function loadUsers() {
         console.log(userlist);
     }
     catch (err) {
-        console.log(err)
-        message.reply('錯誤訊息: ' + err.message);
+        console.log(err);
     }
 }
 
