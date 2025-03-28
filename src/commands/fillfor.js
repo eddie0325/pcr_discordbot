@@ -14,7 +14,7 @@ module.exports = {
             let damage = parseInt(args[3]);
             let no = parseInt(args[1]);
             if (isNaN(no) || no > 3||no < 1) { message.reply('請輸入正確順序(隊伍)');  return;}
-            if (isNaN(damage) || damage > 100000000) {message.reply('指令錯誤或數據過高!'); return;}
+            if (isNaN(damage)) {message.reply('指令錯誤!'); return;}
             let sec='';
             let object = '';
             let ps = '';

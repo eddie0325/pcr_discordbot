@@ -8,7 +8,7 @@ module.exports = {
         try {
             let memberid = message.author.id;
             let damage = parseInt(args[2]);
-            if (isNaN(damage) || damage > 100000000) { message.reply('指令錯誤或數據過高!');  return;}
+            if (isNaN(damage)) { message.reply('指令錯誤!');  return;}
             let no = parseInt(args[0]);
             if (isNaN(no) || no >=4||no <= 0) { message.reply('請輸入正確順序(隊伍)');  return;}
             let sec='';
