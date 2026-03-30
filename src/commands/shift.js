@@ -3,7 +3,7 @@ const DEFAULT_FULL_SECONDS = 90;
 
 /**
  * 將開頭時間字串解析為總秒數。
- * 支援：1:11、111（1 分 11 秒）、057（0 分 57 秒）
+ * 支援：1:11、111（1 分 11 秒）、057（0 分 57 秒）、0129（MMSS，1 分 29 秒）
  */
 function parseTimeToken(raw) {
     if (raw.includes(':')) {
@@ -11,6 +11,12 @@ function parseTimeToken(raw) {
         if (parts.length !== 2) return null;
         const mm = parseInt(parts[0], 10);
         const ss = parseInt(parts[1], 10);
+        if (Number.isNaN(mm) || Number.isNaN(ss) || ss > 59) return null;
+        return mm * 60 + ss;
+    }
+    if (/^\d{4}$/.test(raw)) {
+        const mm = parseInt(raw.slice(0, 2), 10);
+        const ss = parseInt(raw.slice(2, 4), 10);
         if (Number.isNaN(mm) || Number.isNaN(ss) || ss > 59) return null;
         return mm * 60 + ss;
     }
@@ -44,7 +50,8 @@ function formatNegativeTimelineSeconds(sec) {
  * @returns {null|{ newSec: number, indent: string, quote: string, rest: string }}
  */
 function analyzeLine(line, deltaSec) {
-    const m = line.match(/^(\s*)(['\u2019]?)((?:\d{1,2}:\d{2})|(?:\d{3}))(?=\s|$)/);
+    // 時間後可為空白或與文字相連；四位數須在三位數之前（0129XXX）；下一字為數字則不算結束（避免 0570 誤判）
+    const m = line.match(/^(\s*)(['\u2019]?)((?:\d{1,2}:\d{2})|(?:\d{4})|(?:\d{3}))(?=\D|$)/);
     if (!m) return null;
     const raw = m[3];
     const oldSec = parseTimeToken(raw);
@@ -74,7 +81,7 @@ function processTimeline(text, targetSeconds) {
     }
     let firstNegIdx = -1;
     for (i = 0; i < n; i++) {
-        if (analyses[i] !== null && analyses[i].newSec < 0) {
+        if (analyses[i] !== null && analyses[i].newSec <= 0) {
             firstNegIdx = i;
             break;
         }
@@ -98,10 +105,14 @@ function processTimeline(text, targetSeconds) {
     }
     const firstNeg = analyses[firstNegIdx];
     const restTrim = firstNeg.rest.replace(/^\s+/, '');
+    const problemTimeLabel =
+        firstNeg.newSec === 0
+            ? formatTimelineSeconds(0)
+            : formatNegativeTimelineSeconds(firstNeg.newSec);
     out.push(
         firstNeg.indent +
             '[' +
-            formatNegativeTimelineSeconds(firstNeg.newSec) +
+            problemTimeLabel +
             ' 開不了] ' +
             restTrim
     );
