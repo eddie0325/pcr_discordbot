@@ -24,7 +24,7 @@ module.exports = {
                 message.reply('指令輸入錯誤! 請使用 <!登記 組別名稱> 進行報名 ex: !登記 A');
 						return;
             }
-            let table = await gappi.getGroup(chlist[message.channel.id]);
+            let table = await gapi.getGroup(chlist[message.channel.id]);
             let grouplist = {};
             for (let i = 1; i < table.length; i++) {
                 if (table[i][0] != '') {
@@ -40,7 +40,7 @@ module.exports = {
                 message.reply('組別人數已滿! 請使用 <!查組> 取得詳細分組名單');
 						return;
             }
-            let Dtable = await gappi.getDemageTable(chlist[message.channel.id]);
+            let Dtable = await gapi.getDemageTable(chlist[message.channel.id]);
             let row = 0;
             for (let i = 0; i < Dtable.length; i++) {
                 if (Dtable[i][0] == userlist[memberid][0]) row = i;
@@ -49,7 +49,7 @@ module.exports = {
                 throw new Error('查無此人');
             }
             let oriGroup = Dtable[row][19];
-            result = await gappi.fillin(column[19] + (row + 1), [[newGroup]], chlist[message.channel.id], '');
+            result = await gapi.fillin(column[19] + (row + 1), [[newGroup]], chlist[message.channel.id], '');
             if (oriGroup == '' || typeof oriGroup === 'undefined') message.reply(String.format('{1} 已分到 {0}', newGroup, Dtable[row][0]));
             else message.reply(String.format('{2} 已由 {1} 改為 {0}', newGroup, oriGroup, Dtable[row][0]));
         }
